@@ -17,10 +17,31 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('WOOT!') => false
  *
  */
-function dateSample(/* sampleActivity */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function dateSample(sampleActivity) {
+  let newSampleActivity = Number(sampleActivity);
+
+  if(!!newSampleActivity === false || isNaN(newSampleActivity)) {
+    console.log(false);
+    return false;
+  }
+
+  let elapsedTime = MODERN_ACTIVITY / newSampleActivity;
+
+  let k = 0.693 / HALF_LIFE_PERIOD;
+  let t = Math.ceil(Math.log(elapsedTime) / k);
+
+  console.log(t);
+
+  if(t <= 0) {
+    console.log(false);
+    return false;
+  }
+
+  return t;
 }
+
+// dateSample('1');
+dateSample('WOOT!')
 
 module.exports = {
   dateSample
